@@ -12,60 +12,128 @@ class _msglistState extends State<msglist> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: () {},
-            icon: Icon(Icons.arrow_back)),
         backgroundColor: Color(0xFFfff79e72),
-        title: Text('Chats'),
-        actions: [ Row(
-            children: [Padding(
-              padding: EdgeInsets.only(left: 50, right: 2),
-            )
-            ]
-        )
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(left: 5, right: 150, top: 17),
+            child: Text(
+              'Message',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+          ),
         ],
-
       ),
-
-      body: ListView.builder(
-        itemCount: 15,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 80,
-            padding: EdgeInsets.only(right: 7),
-            child:
-              Card(
-                 child:ListTile(
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                   ),
-                   tileColor: Colors.grey,
-                   leading:
-                   CircleAvatar
-                  (
-                  backgroundImage: AssetImage('assets/user.jpeg'),
-                  radius: 25,
-                   ),
-                    title: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                         Padding(
-                           padding: const EdgeInsets.only(bottom: 10),
-                           child: Text('Alice',),
-                         ),
-                      ],
+      body: Padding(
+        padding: const EdgeInsets.all(5),
+        child: Column(
+          children: [
+            Container(
+              height: 50,
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.black26),
+              child: Row(
+                children: [
+                  Container(
+                    width: 10,
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        )),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.1,
+                  ),
+                  Container(
+                    width: 300,
+                    child: TextFormField(
+                      // controller: _search,
+                      decoration: InputDecoration(
+                          hintText: ('Search'),
+                          hintStyle: TextStyle(color: Colors.white70),
+                          border: UnderlineInputBorder()),
                     ),
-                    trailing: IconButton(onPressed: (){},
-                     icon: Icon(Icons.camera_alt_outlined,size: 35,),),
+                  )
+                ],
               ),
-                margin: EdgeInsets.only(top: 10),
-
+            ),
+            Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: ListView.builder(
+                  itemCount: 15,
+                  itemBuilder: (BuildContext context, index) {
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      color: index == 0 ? Colors.black54 : Colors.black12,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: CircleAvatar(
+                                  backgroundImage: AssetImage('assets/user.jpeg'),
+                                  radius: 25,
+                                ),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.fromLTRB(10, 5, 50, 3),
+                                    child: Text(
+                                      'alice',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 20,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                  Text(
+                                    '   hiii',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.italic,
+                                        color: Colors.white70),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Icon(
+                                Icons.check_sharp,
+                                color: Colors.white,
+                                size: 14,
+                              ),
+                              Text(
+                                '09:05 AM',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-          );
-
-        },
+            )
+          ],
+        ),
       ),
-      bottomNavigationBar: Container(height: 8,),
     );
   }
 }
