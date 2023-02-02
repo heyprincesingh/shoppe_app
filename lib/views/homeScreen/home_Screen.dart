@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoppe/views/messageListScreen/list_screen.dart';
 
 class home_Screen extends StatelessWidget {
   const home_Screen({Key? key}) : super(key: key);
@@ -16,10 +17,16 @@ class home_Screen extends StatelessWidget {
           ),
         ),
         actions: [
-          Icon(
-            Icons.chat_outlined,
-            color: Colors.white,
-            size: 25,
+          GestureDetector(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => msglist())),
+            child: Icon(
+              Icons.chat_outlined,
+              color: Colors.white,
+              size: 25,
+            ),
           ),
           SizedBox(width: 15),
           Icon(

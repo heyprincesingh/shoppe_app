@@ -42,7 +42,7 @@ class _msglistState extends State<msglist> {
                    leading:
                    CircleAvatar
                   (
-                  backgroundImage: AssetImage('assest/dp.jfif'),
+                  backgroundImage: AssetImage('assets/user.jpeg'),
                   radius: 25,
                    ),
                     title: Column(
