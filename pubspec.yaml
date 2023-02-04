@@ -40,6 +40,7 @@ dependencies:
   grouped_list: ^5.1.2
   intl: ^0.18.0
   regexed_validator: ^2.0.0+1
+  font_awesome_flutter: ^10.3.0
 
 dev_dependencies:
   flutter_test:

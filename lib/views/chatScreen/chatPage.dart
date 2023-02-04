@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:shoppe/views/cart/mycart.dart';
+import 'package:shoppe/views/homeScreen/productDetails.dart';
 import '../../models/apiData/chatModel.dart';
 import 'package:intl/intl.dart';
 import 'package:regexed_validator/regexed_validator.dart';
@@ -36,7 +38,7 @@ class _ChatPageState extends State<ChatPage> {
       id: '2',
     ),
     Message(
-      text: 'How the this derss look ?',
+      text: 'How does this derss look ?',
       date: DateTime.now().subtract(Duration(days: 1, minutes: 5)),
       id: '1',
     ),
@@ -47,7 +49,7 @@ class _ChatPageState extends State<ChatPage> {
       id: '1',
     ),
     Message(
-      text: 'Nice',
+      text: 'Thats very pretty yr',
       date: DateTime.now().subtract(Duration(days: 1, minutes: 7)),
       id: '2',
     ),
@@ -64,8 +66,17 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xfff79e72),
-        title: const Text('SenderName'),
+        backwardsCompatibility: false,
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 2,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: Icon(Icons.person_outline_outlined,color: Color(0xfff79e72),size: 26),
+          )
+        ],
+        title: const Text('Alice', style: TextStyle(color: Colors.black,fontFamily: "ubuntu"),),
       ),
       body: Column(
         children: [
@@ -109,18 +120,68 @@ class _ChatPageState extends State<ChatPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(12),
                       child: extractLink(message.text)
-                          ? Column(
-                              children: [
-                                Image.network(
-                                    'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS_8DWHcC3dV86V2aWwqGEHlMr1XzDzhCpIQhF9tk2GwN9jG8UP8QdqppTBy_dOTPSx3hkprp_MyAR7-1H_HsTqlRgdBUbXV6GARWApvrUp6omjMiHighhfxA&usqp=CAE',
+                          ? GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => ProductDetails(link: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS_8DWHcC3dV86V2aWwqGEHlMr1XzDzhCpIQhF9tk2GwN9jG8UP8QdqppTBy_dOTPSx3hkprp_MyAR7-1H_HsTqlRgdBUbXV6GARWApvrUp6omjMiHighhfxA&usqp=CAE"),
+                          ),
+                        ),
+                            child: Column(
+                                children: [
+                                  Image.network(
+                                      'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS_8DWHcC3dV86V2aWwqGEHlMr1XzDzhCpIQhF9tk2GwN9jG8UP8QdqppTBy_dOTPSx3hkprp_MyAR7-1H_HsTqlRgdBUbXV6GARWApvrUp6omjMiHighhfxA&usqp=CAE',
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5),
+                                  Container(
                                     width: MediaQuery.of(context).size.width *
-                                        0.5),
-                                Text(
-                                  'Women Blue & Gold-Toned\n Embroidered \nSemi-Stitched Dress Material',
-                                )
-                              ],
-                            )
-                          : Text(message.text),
+                                        0.5,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'Women Blue & Gold-Toned Embroidered Semi-Stitched Dress Material',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          "https://encryp-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS_8DWHcC3dV86V2aWwqGEHlMr1XzDzhCpIQhF9tk2GwN9jG8UP8QdqppTBy_dOTPSx3hkprp_MyAR7-1H_HsTqlRgdBUbXV6GARWApvrUp6omjMiHighhfxA&usqp=CAE",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(color: Colors.blue,decoration: TextDecoration.underline),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) => ProductDetails(link: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS_8DWHcC3dV86V2aWwqGEHlMr1XzDzhCpIQhF9tk2GwN9jG8UP8QdqppTBy_dOTPSx3hkprp_MyAR7-1H_HsTqlRgdBUbXV6GARWApvrUp6omjMiHighhfxA&usqp=CAE',),
+                                            ),
+                                          ),
+                                          child: Container(
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft: Radius.circular(15),
+                                                  bottomRight: Radius.circular(15),
+                                                )
+                                            ),
+                                            child: Center(
+                                                child: Text(
+                                                  'Add To Cart',
+                                                  style: TextStyle(color: Colors.white, fontSize: 15),
+                                                )),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  
+                                ],
+                              ),
+                          )
+                          : Padding(
+                            padding: const EdgeInsets.only(left: 5,right: 5),
+                            child: Text(message.text),
+                          ),
                     ),
                   ),
                 ),
@@ -128,7 +189,9 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ),
           Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+                color: Colors.black12,
+                borderRadius: BorderRadius.circular(10)),
             child: TextField(
               decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(12), hintText: 'Message..'),
